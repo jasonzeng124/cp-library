@@ -4,8 +4,8 @@ using namespace std;
 
 
 #ifndef DEBUG
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-mt19937_64 rng64(chrono::steady_clock::now().time_since_epoch().count());
+mt19937 rng(chrono::high_resolution_clock::now().time_since_epoch().count());
+mt19937_64 rng64(chrono::high_resolution_clock::now().time_since_epoch().count());
 #endif
 #ifdef DEBUG
 mt19937 rng(42);

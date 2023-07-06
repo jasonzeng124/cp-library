@@ -1,4 +1,5 @@
 #pragma once
+#include "opt.hpp"
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -10,10 +11,6 @@
 using namespace std;
 
 #include "debug.hpp"
-
-#ifndef INLINE
-#define INLINE inline __attribute__((always_inline))
-#endif
 
 // TODO: fastio debug mode
 #define IOBUF_SZ (1<<21)

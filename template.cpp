@@ -22,7 +22,7 @@ using namespace std;
 #include <assert.h>
 #endif
 #ifndef DEBUG
-#define dprintf(args...)
+#define dprintf(args...) 69
 #define assert(args...) 42
 #endif
 // 1}}}
