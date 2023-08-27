@@ -5,9 +5,7 @@ struct DSU
 {
         int n; std::vector<int> up;
 
-        DSU(int n) : n(n) {
-                up.assign(n,-1);
-        }
+        DSU(int n) : n(n), up(n, -1) {}
 
         DSU() : DSU(0) {}
 

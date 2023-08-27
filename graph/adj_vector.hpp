@@ -34,7 +34,13 @@ struct adj_vector
                 for (auto [v, e] : acc_edge) {
                         adj[nind[v]++] = e;
                 }
-                acc_edge.clear(); acc_edge.shrink_to_fit();
+                vector<pair<int,edge_t>>().swap(acc_edge);
+        }
+
+        void clear() {
+                vector<pair<int, edge_t>>().swap(acc_edge);
+                vector<edge_t>().swap(adj);
+                vector<int>().swap(start);
         }
 
         inline int deg(int v) {

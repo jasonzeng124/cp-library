@@ -4,26 +4,28 @@ extern "C" int __lsan_is_turned_off() { return 1; }
 #include <stdlib.h>
 #include <math.h>
 
-#include <vector>
 #include <algorithm>
-#include <set>
-#include <map>
-#include <string>
+#include <complex>
 #include <iostream>
+#include <array>
+#include <vector>
+#include <string>
 #include <deque>
+#include <queue>
+#include <map>
+#include <set>
 using namespace std;
 
 #define ll long long
 #define inf 0x3f3f3f3f
 #define infl 0x3f3f3f3f3f3f3f3f
 
+#include <assert.h>
 #ifdef DEBUG
 #define dprintf(args...) fprintf(stderr,args)
-#include <assert.h>
 #endif
 #ifndef DEBUG
 #define dprintf(args...) 69
-#define assert(args...) 42
 #endif
 // 1}}}
 

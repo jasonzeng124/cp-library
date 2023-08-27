@@ -29,7 +29,7 @@ int main()
         assert(x==6);
 
         long long y, z;
-        int g = extgcd(66, 674, y, z);
+        int g = extgcd(66ll, 674ll, y, z);
         assert(y==143 && z==-14 && g==2);
         assert(eulerphi(12)==4);
         assert(eulerphi(667)==616);
