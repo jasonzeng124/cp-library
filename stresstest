@@ -1,0 +1,116 @@
+#!/usr/bin/python3
+import atexit
+import os
+import sys
+import signal
+import argparse
+import multiprocessing as mp
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('times', type=int)
+parser.add_argument('-p', '--parallel', type=int, nargs='?', const=os.cpu_count(), default=None)
+parser.add_argument('-a', nargs='+', required=True)
+parser.add_argument('-b', nargs='+')
+parser.add_argument('gen', nargs='+')
+
+args = parser.parse_args(sys.argv[1:])
+
+
+print("stresstest {times} -p {parallel} -a {prog1} -b {prog2} {gen}")
+ttimes = mp.Value('i', 0)
+
+is_lead=0
+
+def islprint(*args,**kwargs):
+    if is_lead:
+        with ttimes.get_lock():
+            if ttimes.value==-1: return
+            print(*args,**kwargs)
+
+def stresstest(times,prog1,prog2,gen,is_leader):
+    global is_lead
+    is_lead = is_leader
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+    for i in range(1, int(times)):
+        with ttimes.get_lock():
+            if ttimes.value==-1: return
+            ttimes.value+=1
+
+        islprint(ttimes.value, end='\t', flush=1)
+
+        with open(f"test_{os.getpid()}.in", 'w') as f:
+            islprint("gen", end='\t', flush=1)
+            test = os.popen(gen).read()
+            f.write(test)
+
+        out1=None
+        out2=None
+        ck1=None
+        ck2=None
+        xc1=None
+        xc2=None
+        try:
+            if prog1!=':':
+                islprint("prog1", end="\t", flush=1)
+                out1 = (p1 := os.popen(f"{prog1} < test_{os.getpid()}.in 2>/dev/null")).read().strip()
+                ck1 = out1.strip().split()
+                xc1 = p1.close()
+            if prog2!=':':
+                islprint("prog2", end="\t", flush=1)
+                out2 = (p2 := os.popen(f"{prog2} < test_{os.getpid()}.in 2>/dev/null")).read().strip()
+                ck2 = out2.strip().split()
+                xc2 = p2.close()
+        except Exception as e:
+            with ttimes.get_lock():
+                print("Exception: ", e)
+                ttimes.value = -1
+            return
+
+        if ck1==None:
+            ck1=ck2
+        if ck2==None:
+            ck2=ck1
+
+        islprint("done", end=' '*30 + '\n', flush=1)
+
+        if ck1 != ck2 or xc1 != None or xc2 != None:
+            with ttimes.get_lock():
+                if (ttimes.value == -1): return
+                ttimes.value = -1
+                print("\n\nfound break case:\n")
+                print(test)
+                print("prog1", prog1, "xcode=", xc1)
+                print(out1)
+                print("prog2", prog2, "xcode=", xc2)
+                print(out2)
+                os.system(f"mv test_{os.getpid()}.in break.in")
+                return
+
+times = args.times
+parallel = args.parallel
+prog1 = ' '.join(args.a)
+prog2 = ' '.join(args.b)
+gen =   ' '.join(args.gen)
+
+
+if __name__ == '__main__':
+    if parallel is None:
+        stresstest(times, prog1, prog2, gen, True)
+    else:
+        times //= parallel
+        print(f"applying {parallel} processes with {times} each")
+        with mp.Pool(parallel) as pool:
+            def manage_ctrlC(*args):
+                pool.terminate()
+                pool.close()
+                os.system("rm -rf test*.in")
+                exit(42)
+            signal.signal(signal.SIGINT, manage_ctrlC)
+            for i in range(parallel):
+                pool.apply_async(stresstest, [times,prog1,prog2,gen,i==0])
+            pool.close()
+            pool.join()
+
+os.system("rm -f test_*.in")
