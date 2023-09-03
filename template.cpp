@@ -18,7 +18,7 @@ using namespace std;
 
 #define ll long long
 #define inf 0x3f3f3f3f
-#define infl 0x3f3f3f3f3f3f3f3f
+#define infl 0x3f3f3f3f3f3f3f3fll
 
 #include <assert.h>
 #ifdef DEBUG

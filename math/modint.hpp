@@ -79,13 +79,8 @@ struct modular
                 return T(x);
         }
 
-        modular& operator++() {
-                x++; if (x==mod) x=0;
-                return *this; }
-        modular& operator--() {
-                if (x==0) x=mod;
-                x--; return *this; }
-
+        modular& operator++() { return *this+=1; }
+        modular& operator--() { return *this-=1; }
         modular operator++(int) { modular res=*this; ++*this; return res; }
         modular operator--(int) { modular res=*this; --*this; return res; }
 
@@ -95,10 +90,6 @@ struct modular
                 return x != y.x; }
         modular operator+() const { return *this; }
         modular operator-() const { return modular()-*this; }
-        modular operator+(const modular& y) { return modular(x)+=y; }
-        modular operator-(const modular& y) { return modular(x)-=y; }
-        modular operator*(const modular& y) { return modular(x)*=y; }
-        modular operator/(const modular& y) { return modular(x)/=y; }
 
         modular& operator=(const modular& o) {
                 x = o.x;
@@ -159,6 +150,18 @@ struct modular
                 return bx;
         }
 };
+template<typename Int, Int mod> modular<Int, mod> operator+(modular<Int, mod> x, const modular<Int, mod>& y) { return x+=y; }
+template<typename Int, Int mod> modular<Int, mod> operator-(modular<Int, mod> x, const modular<Int, mod>& y) { return x-=y; }
+template<typename Int, Int mod> modular<Int, mod> operator*(modular<Int, mod> x, const modular<Int, mod>& y) { return x*=y; }
+template<typename Int, Int mod> modular<Int, mod> operator/(modular<Int, mod> x, const modular<Int, mod>& y) { return x/=y; }
+template<typename T, typename Int, Int mod> modular<Int, mod> operator+(modular<Int, mod> x, T y) { return x+=y; }
+template<typename T, typename Int, Int mod> modular<Int, mod> operator-(modular<Int, mod> x, T y) { return x-=y; }
+template<typename T, typename Int, Int mod> modular<Int, mod> operator*(modular<Int, mod> x, T y) { return x*=y; }
+template<typename T, typename Int, Int mod> modular<Int, mod> operator/(modular<Int, mod> x, T y) { return x/=y; }
+template<typename T, typename Int, Int mod> modular<Int, mod> operator+(T x, const modular<Int, mod>& y) { return modular<Int,mod>(x)+=y; }
+template<typename T, typename Int, Int mod> modular<Int, mod> operator-(T x, const modular<Int, mod>& y) { return modular<Int,mod>(x)-=y; }
+template<typename T, typename Int, Int mod> modular<Int, mod> operator*(T x, const modular<Int, mod>& y) { return modular<Int,mod>(x)*=y; }
+template<typename T, typename Int, Int mod> modular<Int, mod> operator/(T x, const modular<Int, mod>& y) { return modular<Int,mod>(x)/=y; }
 
 template<long long mod> using modll = modular<long long, mod>;
 template<int mod> using modint = modular<int, mod>;
