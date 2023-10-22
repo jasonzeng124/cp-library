@@ -33,7 +33,7 @@ int main()
 {
         int tt;
         scanf("%d",&tt);
-        while(tt--)
+        for(int ttn=0;ttn<tt;ttn++)
         {
                 // glhf
                 // don't die

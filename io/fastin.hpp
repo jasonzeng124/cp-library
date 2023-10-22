@@ -6,6 +6,7 @@
 #include <unistd.h> // syscalls
 #include <immintrin.h>
 
+#include <string>
 #include <limits>
 #include <type_traits>
 using namespace std;
@@ -17,19 +18,11 @@ using namespace std;
 
 namespace fastio
 {
-#ifdef DEBUG
-        bool isfirst = true;
-#endif
         char ibuf[IOBUF_SZ*2+1];
         char* readptr = ibuf;
         char* rendptr = ibuf;
 
         INLINE void ioload() { // 2-buf swapping
-#ifdef DEBUG
-                if(isfirst && isatty(fileno(stdin)))
-                        dprintf(REDTEXT "Running from a terminal! Use Ctrl-D to give EOF.\nAlso, in interactive problems, #define PRELOAD 0\n" RESETEXT);
-                isfirst=false;
-#endif
                 assert(readptr <= rendptr);
                 if (rendptr < ibuf+IOBUF_SZ) {
                         memcpy(ibuf+IOBUF_SZ, readptr, rendptr-readptr);
@@ -49,12 +42,14 @@ namespace fastio
         }
         struct IOPreIn {
                 IOPreIn() {
+#ifdef DEBUG
+                        if(isatty(fileno(stdin)))
+                                dprintf(REDTEXT "Running from a terminal! Use Ctrl-D to give EOF.\nAlso, in interactive problems, #define PRELOAD 0\n" RESETEXT);
+#endif
 #ifndef PRELOAD
 #define PRELOAD 1
 #endif
-#if PRELOAD
-                        ioload();
-#endif
+                        if(PRELOAD) ioload();
                 }
         } iopre_in;
 
@@ -64,7 +59,7 @@ namespace fastio
         }
 
         INLINE void skip_white() {
-                while (*readptr <= ' ' && readptr < rendptr) {
+                while (readptr < rendptr && *readptr <= ' ') {
                         readptr++;
                 }
         }
@@ -106,6 +101,19 @@ namespace fastio
                 read_ensure(20);
                 memcpy(x, readptr, len);
                 readptr += len;
+        }
+
+        INLINE void scan_str(string& s) {
+                read_ensure(20);
+                skip_white();
+                for(;;) {
+                        read_ensure(20);
+                        for(int i=0;i<20;i++) {
+                                char x=*readptr++;
+                                if(x<=' ') return;
+                                s.push_back(x);
+                        }
+                }
         }
 
         template<typename Int, enable_if_t<is_integral<Int>::value, int> = 69420>
