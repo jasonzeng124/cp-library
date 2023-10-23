@@ -1,8 +1,8 @@
+// {{{1
 #define ll long long
 #include <stdio.h>
 
 // china io template
-// 1<<20 is 1mb (around 5e2 ll's)
 #define BUFSZ (1<<22)
 char ibuf[BUFSZ],obuf[BUFSZ];
 char* ip=ibuf, * op=obuf;
@@ -15,7 +15,6 @@ ll read() {
         while((c=gc())>' ')x=x*10+c-'0';
         return x;
 }
-
 char* read_str(char* x) { // note no null termination; returns past-end pointer
         char c;
         while((c=gc())<=' ');
@@ -23,7 +22,6 @@ char* read_str(char* x) { // note no null termination; returns past-end pointer
         while((c=gc())>' ')*x++=c;
         return x;
 }
-
 void write(ll x) {
         if(x>9) write(x/10);
         *op++=x%10+'0';
@@ -43,3 +41,4 @@ int main() {
         flush();
 }
 #endif
+// 1}}}
