@@ -1,4 +1,6 @@
 // {{{1
+#pragma GCC optimize("Ofast,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 #define ll long long
 #include <stdio.h>
 
@@ -10,10 +12,11 @@ char* ip=ibuf, * op=obuf;
 
 ll read() {
         char c;
-        while((c=gc())<=' ');
-        ll x=c-'0';
-        while((c=gc())>' ')x=x*10+c-'0';
-        return x;
+        int sgn=0;
+        while((c=gc())<'0')sgn|=c=='-';
+        ll x=-(c-'0');
+        while((c=gc())>' ')x=x*10-(c-'0');
+        return sgn?x:-x;
 }
 char* read_str(char* x) { // note no null termination; returns past-end pointer
         char c;
@@ -22,12 +25,16 @@ char* read_str(char* x) { // note no null termination; returns past-end pointer
         while((c=gc())>' ')*x++=c;
         return x;
 }
+void write_(ll x) {
+        if(x<-9) write(x/10);
+        *op++=-(x%10)+'0';
+}
 void write(ll x) {
-        if(x>9) write(x/10);
-        *op++=x%10+'0';
+        if(x<0) return *op++='-',write_(x);
+        write_(-x);
 }
 
-void flush() { fwrite(op=obuf,1,BUFSZ,stdout); }
+void flush() { fwrite(obuf,1,op-obuf,stdout), op=obuf; }
 
 #ifdef CHINAIO_TEST
 int main() {
