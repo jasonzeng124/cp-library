@@ -10,7 +10,7 @@ namespace _factor_detail {
         using namespace std;
         typedef uint32_t ui;
 
-        __attribute__((noinline))
+        __attribute__((cold))
         void factor_helper(vector<ui>& v, ui& x, ui y) {
                 do {
                         v.push_back(y);
@@ -49,7 +49,16 @@ namespace _factor_detail {
 std::vector<int> factor(uint32_t x) {
         assert(x<=1e9);
         std::vector<uint32_t> v;
-        _factor_detail::factor_(v, x);
+        using namespace _factor_detail;
+#pragma GCC unroll(19)
+        for(int i=0;i<19;i++) {
+                if(x<primes[179*i]*primes[179*i]) break;
+#pragma GCC unroll(179)
+                for(int j=179*i;j<179*(i+1);j++)
+                        if(x%primes[j]==0)[[unlikely]]
+                                factor_helper(v,x,primes[j]);
+        }
+        //_factor_detail::factor_(v, x);
         if(x > 1) v.push_back(x);
         return std::vector<int>{v.begin(),v.end()};
 }
