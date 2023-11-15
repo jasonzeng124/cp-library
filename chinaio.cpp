@@ -1,4 +1,4 @@
-// {{{1
+// {{{1 chinese io, passes magnus input test in 639 ms
 #pragma GCC optimize("Ofast,unroll-loops")
 #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 #define ll long long
@@ -26,7 +26,7 @@ char* read_str(char* x) { // note no null termination; returns past-end pointer
         return x;
 }
 void write_(ll x) {
-        if(x<-9) write(x/10);
+        if(x<-9) write_(x/10);
         *op++=-(x%10)+'0';
 }
 void write(ll x) {
