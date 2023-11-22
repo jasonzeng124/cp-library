@@ -33,6 +33,10 @@ void write(ll x) {
         if(x<0) return *op++='-',write_(x);
         write_(-x);
 }
+void write_str(char* x) {
+        while(*op++=*x++);
+        op--;
+}
 
 void flush() { fwrite(obuf,1,op-obuf,stdout), op=obuf; }
 

@@ -14,7 +14,6 @@ static unsigned long long splitmix64(T x) {
 
 template<typename T>
 struct splitmix {
-
         unsigned long long operator()(unsigned long long x) const {
                 static const unsigned long long FIXED_RANDOM = chrono::high_resolution_clock::now().time_since_epoch().count();
                 return splitmix64(x + FIXED_RANDOM);

@@ -68,6 +68,8 @@ struct modular
         Int x;
         modular() : x(0) {}
 
+        static int get_mod() { return mod; }
+
         template<typename T>
         constexpr modular(T num) : x(num%mod) { if (x<0) x+=mod; }
 
@@ -108,7 +110,7 @@ struct modular
                 if (r<0) r+=mod;
                 x = r;
                 return *this;
-        } // TODO for other types...
+        }
         constexpr modular& operator/=(const modular& o) {
                 return *this *= modular(o).inv(); }
 
@@ -131,10 +133,6 @@ struct modular
         constexpr modular inv(bool use_extgcd = 0) {
                 if (gcd(x, mod) != 1)
                         return 0;
-
-                // by a^phi(n)-1 mod n
-                if (use_extgcd == 0)
-                        return pow(-1);
 
                 // by ext. Euclidean algo
                 Int bx, bm;
