@@ -6,19 +6,19 @@ using namespace std;
 
 template<typename T, int LG=20, typename Compare = less<T>>
 struct RMQ {
-        vector<T> arr;
-        vector<T> st;
         int n;
+        vector<T> arr;
+        vector<int> st;
         RMQ(int n) : n(n), arr(n) {
                 assert(n <= 1<<LG);
                 st.resize(n * LG);
                 for(int i=0;i<n;i++) st[i] = i;
         }
-        T argmin(T a, T b) {
-                return less()(a,b) ? a : b;
+        int argmin(int a, int b) {
+                return less()(arr[a],arr[b]) ? a : b;
         }
-        void build(vector<int> a) {
-                arr = a;
+        void build(T* a) {
+                for(int i=0;i<n;i++) arr[i] = a[i];
                 for(int l=1; l<LG; l++) 
                         for(int i=0; i + (1<<(l-1)) < n; i++)
                                 st[l*n+i] = argmin(

@@ -34,7 +34,7 @@ void write(ll x) {
         write_(-x);
 }
 void write_str(char* x) {
-        while(*op++=*x++);
+        while((*op++=*x++));
         op--;
 }
 
@@ -47,7 +47,8 @@ int main() {
         flush();
         char buf[20];
         char* e=read_str(buf);
-        for(char* p=buf;p<e;p++)*op++=*p;
+        *e++=0;
+        write_str(buf);
         *op++='\n';
         flush();
 }
