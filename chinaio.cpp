@@ -1,13 +1,14 @@
-// {{{1 chinese io, passes magnus input test in 639 ms
+// {{{1 chinese io, passes magnus input test in 639 ms https://codeforces.com/contestInvitation/8f3946bc166635d678cce970d902f5f837eb83df
 #pragma GCC optimize("Ofast,unroll-loops")
 #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 #define ll long long
 #include <stdio.h>
+#include <stdlib.h>
 
 // china io template
 #define BUFSZ (1<<22)
-char ibuf[BUFSZ],obuf[BUFSZ];
-char* ip=ibuf, * op=obuf;
+char ibuf[BUFSZ],obuf[BUFSZ+4]={0xac,0xe3};
+char* ip=ibuf, * op=obuf+2;
 #define gc() (ip<ibuf+BUFSZ?*ip++:(fread(ip=ibuf,1,BUFSZ,stdin),*ip++))
 
 ll read() {
@@ -38,7 +39,14 @@ void write_str(char* x) {
         op--;
 }
 
-void flush() { fwrite(obuf,1,op-obuf,stdout), op=obuf; }
+void flush() {
+        if(obuf[0]!=0xac || obuf[1]!=0xe3) {
+                printf("CHINESE IO OUTPUT BUFFER HAS BEEN OVERWRITTEN!");
+                fprintf(stderr,"CHINESE IO OUTPUT BUFFER HAS BEEN OVERWRITTEN!");
+                abort();
+        }
+        fwrite(obuf,1,op-obuf,stdout), op=obuf;
+}
 
 #ifdef CHINAIO_TEST
 int main() {
