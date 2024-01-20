@@ -1,19 +1,6 @@
 // {{{1
 extern "C" int __lsan_is_turned_off() { return 1; }
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-#include <algorithm>
-#include <complex>
-#include <iostream>
-#include <array>
-#include <vector>
-#include <string>
-#include <deque>
-#include <queue>
-#include <map>
-#include <set>
+#include <bits/stdc++.h>
 using namespace std;
 
 #define ll long long
@@ -27,6 +14,7 @@ using namespace std;
 #ifndef DEBUG
 #define dprintf(args...) 69
 #endif
+#define all(x) (x).begin(), (x).end()
 // 1}}}
 
 int main()

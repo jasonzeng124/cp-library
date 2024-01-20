@@ -3,10 +3,9 @@
 
 #include <utility>
 #include <tuple>
+using namespace std;
 
 #include "math/modint.hpp"
-
-using namespace std;
 
 template<typename Int, int index>
 struct dynamic_modular

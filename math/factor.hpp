@@ -34,16 +34,6 @@ namespace _factor_detail {
                 assert(ptr==P);
                 return primes;
         }();
-
-        template<int L=0, int R=P-1, int M=(L+R)/2>
-        constexpr void factor_(vector<ui>& v, ui& x) {
-                if constexpr (L < R) {
-                        factor_<L,M>(v,x);
-                        if(L + 40 < R && x < primes[M]*primes[M]) return;
-                        factor_<M+1,R>(v,x);
-                }
-                else if (x % primes[L] == 0) factor_helper(v, x, primes[L]);
-        }
 }
 
 std::vector<int> factor(uint32_t x) {
@@ -58,7 +48,6 @@ std::vector<int> factor(uint32_t x) {
                         if(x%primes[j]==0)[[unlikely]]
                                 factor_helper(v,x,primes[j]);
         }
-        //_factor_detail::factor_(v, x);
         if(x > 1) v.push_back(x);
         return std::vector<int>{v.begin(),v.end()};
 }

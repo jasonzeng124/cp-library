@@ -28,6 +28,16 @@ def islprint(*args,**kwargs):
             if ttimes.value==-1: return
             print(*args,**kwargs)
 
+def print_long(s):
+    if len(s) > 500:
+        s=s[:500]+'...'
+    s=s.split('\n')
+    if len(s) > 15:
+        s=s[:15]+['...']
+    s='\n'.join(s)
+    s=s.replace(' ','_')
+    print(s)
+
 def stresstest(times,prog1,prog2,gen,is_leader):
     global is_lead
     is_lead = is_leader
@@ -80,11 +90,11 @@ def stresstest(times,prog1,prog2,gen,is_leader):
                 if (ttimes.value == -1): return
                 ttimes.value = -1
                 print("\n\nfound break case:\n")
-                print(test)
+                print_long(test)
                 print("prog1", prog1, "xcode=", xc1)
-                print(out1)
+                print_long(out1)
                 print("prog2", prog2, "xcode=", xc2)
-                print(out2)
+                print_long(out2)
                 os.system(f"mv test_{os.getpid()}.in break.in")
                 return
 
