@@ -7,8 +7,8 @@
 
 // china io template
 #define BUFSZ (1<<22)
-char ibuf[BUFSZ],obuf[BUFSZ+4]={0xac,0xe3};
-char* ip=ibuf, * op=obuf+2;
+char ibuf[BUFSZ],obuf[BUFSZ];
+char* ip=ibuf+BUFSZ, * op=obuf;
 #define gc() (ip<ibuf+BUFSZ?*ip++:(fread(ip=ibuf,1,BUFSZ,stdin),*ip++))
 
 ll read() {
@@ -40,11 +40,6 @@ void write_str(char* x) {
 }
 
 void flush() {
-        if(obuf[0]!=0xac || obuf[1]!=0xe3) {
-                printf("CHINESE IO OUTPUT BUFFER HAS BEEN OVERWRITTEN!");
-                fprintf(stderr,"CHINESE IO OUTPUT BUFFER HAS BEEN OVERWRITTEN!");
-                abort();
-        }
         fwrite(obuf,1,op-obuf,stdout), op=obuf;
 }
 
