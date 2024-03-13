@@ -29,6 +29,9 @@ def islprint(*args,**kwargs):
             print(*args,**kwargs)
 
 def print_long(s):
+    if s is None:
+        print("__no output__")
+        return
     if len(s) > 500:
         s=s[:500]+'...'
     s=s.split('\n')
@@ -95,6 +98,7 @@ def stresstest(times,prog1,prog2,gen,is_leader):
                 print_long(out1)
                 print("prog2", prog2, "xcode=", xc2)
                 print_long(out2)
+                print(f"mv test_{os.getpid()}.in break.in")
                 os.system(f"mv test_{os.getpid()}.in break.in")
                 return
 

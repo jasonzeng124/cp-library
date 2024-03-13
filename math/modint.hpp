@@ -102,13 +102,20 @@ struct modular
                 if (x<0) x+=mod;
                 return *this; }
 
-        template<enable_if_t<is_integral<Int>::value, int> = 69420>
+        template<enable_if_t<is_same<Int, int>::value, int> = 69420>
         constexpr modular& operator*=(const modular& o) {
+                x = (long long) x * o.x % mod;
+                return *this;
                 // https://cs.stackexchange.com/questions/77016/modular-multiplication
-                unsigned long long ab=(long double)x*o.x / mod;
-                long long r = ((long long)x*o.x - ab*mod) % mod;
-                if (r<0) r+=mod;
-                x = r;
+                //unsigned long long ab=(long double)x*o.x / mod;
+                //long long r = ((long long)x*o.x - ab*mod) % mod;
+                //if (r<0) r+=mod;
+                //x = r;
+                //return *this;
+        }
+        template<enable_if_t<is_same<Int, long long>::value, int> = 69420>
+        constexpr modular& operator*=(const modular& o) {
+                x = (__int128) x * o.x % mod;
                 return *this;
         }
         constexpr modular& operator/=(const modular& o) {
@@ -130,7 +137,7 @@ struct modular
                 return y;
         }
 
-        constexpr modular inv(bool use_extgcd = 0) {
+        constexpr modular inv() const {
                 if (gcd(x, mod) != 1)
                         return 0;
 

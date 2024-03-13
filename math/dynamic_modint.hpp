@@ -48,15 +48,23 @@ struct dynamic_modular
                 if (x<0) x+=mod;
                 return *this; }
 
-        template<enable_if_t<is_integral<Int>::value, int> = 69420>
+        template<enable_if_t<is_same<Int, int>::value, int> = 69420>
         constexpr dynamic_modular& operator*=(const dynamic_modular& o) {
-                // https://cs.stackexchange.com/questions/77016/dynamic_modular-multiplication
-                unsigned long long ab=(long double)x*o.x / mod;
-                long long r = ((long long)x*o.x - ab*mod) % mod;
-                if (r<0) r+=mod;
-                x = r;
+                x = (long long) x * o.x % mod;
+                return *this;
+                // https://cs.stackexchange.com/questions/77016/modular-multiplication
+                //unsigned long long ab=(long double)x*o.x / mod;
+                //long long r = ((long long)x*o.x - ab*mod) % mod;
+                //if (r<0) r+=mod;
+                //x = r;
+                //return *this;
+        }
+        template<enable_if_t<is_same<Int, long long>::value, int> = 69420>
+        constexpr dynamic_modular& operator*=(const dynamic_modular& o) {
+                x = (__int128) x * o.x % mod;
                 return *this;
         }
+
         constexpr dynamic_modular& operator/=(const dynamic_modular& o) {
                 return *this *= dynamic_modular(o).inv(); }
 
@@ -64,7 +72,7 @@ struct dynamic_modular
                 Int totient = eulerphi(mod);
                 if (gcd(x, mod) == 1)
                         pwr = (pwr % totient + totient) % totient;
-                assert("dynamic_modular power must be >= 0" && pwr>=0);
+                assert("modular power must be >= 0" && pwr>=0);
                 dynamic_modular power = x;
                 dynamic_modular y = 1;
                 while (pwr > 0) {
@@ -76,7 +84,7 @@ struct dynamic_modular
                 return y;
         }
 
-        constexpr dynamic_modular inv(bool use_extgcd = 0) {
+        constexpr dynamic_modular inv() const {
                 if (gcd(x, mod) != 1)
                         return 0;
 

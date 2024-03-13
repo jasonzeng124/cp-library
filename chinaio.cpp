@@ -34,7 +34,7 @@ void write(ll x) {
         if(x<0) return *op++='-',write_(x);
         write_(-x);
 }
-void write_str(char* x) {
+void write_str(const char* x) {
         while((*op++=*x++));
         op--;
 }
@@ -42,6 +42,9 @@ void write_str(char* x) {
 void flush() {
         fwrite(obuf,1,op-obuf,stdout), op=obuf;
 }
+
+struct intype { operator ll() { return read(); } };
+#define scanf nonsense
 
 #ifdef CHINAIO_TEST
 int main() {
