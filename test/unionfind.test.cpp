@@ -2,23 +2,23 @@
 #include <assert.h>
 #include <time.h>
 
-#include "io/fastio.hpp"
 #include "ds/dsu.hpp"
+#include "chinaio.cpp"
+intype in;
 
-using namespace fastio;
 
 int main()
 {
-        read_ensure(100);
-        int n,q; scan(n,q);
+        int n=in,q=in;
 
         DSU dsu(n);
         while(q--) {
-                int t,u,v; read_ensure(100); scan(t,u,v);
+                int t=in,u=in,v=in;
 
                 if(t) {
-                        write_ensure(100); print(dsu.find(u)==dsu.find(v),'\n');
+                        write(dsu.find(u)==dsu.find(v)),*op++='\n';
                 }
                 else dsu.unite(u,v);
         }
+        return flush(),0;
 }

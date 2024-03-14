@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include <assert.h>
+#include <stdio.h>
 #include <time.h>
 
-#include "io/fastio.hpp"
 #include "math/modint.hpp"
 typedef modint<7> mint7;
 typedef modint<1'000'000'007> mint;
@@ -41,12 +41,12 @@ int main()
 
         assert(mint7(3).pow(-1)==5);
         assert(modint<667>(33).inv()==283);
-        assert(modint<667>(33).inv(1)==283);
+        assert(modint<667>(33).inv()==283);
 
         assert(mint(12345).inv()==203483193);
-        assert(modint<1'000'000'007>(12345).inv(1)==203483193);
+        assert(modint<1'000'000'007>(12345).inv()==203483193);
 
-        assert(modint<1'000'000'000>(12345).inv(1)==0);
+        assert(modint<1'000'000'000>(12345).inv()==0);
 
         unsigned long long rng=0x6969696969420;
         int mod = 1000'000'007;
@@ -67,25 +67,24 @@ int main()
 
                 assert(xa+xb==(ra+rb)%mod);
                 assert(xa*xb==(ra*rb)%mod);
-                assert(xa*xa.inv(0)==1);
-                assert(xa*xa.inv(1)==1);
+                assert(xa*xa.inv()==1);
+                assert(xa*xa.inv()==1);
                 assert(xa.pow(5)==ra*ra%mod*ra%mod*ra%mod*ra%mod);
 
                 xa++,ra=(ra+1)%mod;xb--,rb=(rb-1+mod)%mod;
                 assert(xa+xb==(ra+rb)%mod);
                 assert(xa*xb==(ra*rb)%mod);
-                assert(xa*xa.inv(0)==1);
-                assert(xa*xa.inv(1)==1);
+                assert(xa*xa.inv()==1);
+                assert(xa*xa.inv()==1);
 
                 xa+=12093,ra=(ra+12093)%mod;
                 assert(xa+xb==(ra+rb)%mod);
                 assert(xa*xb==(ra*rb)%mod);
-                assert(xa*xa.inv(0)==1);
-                assert(xa*xa.inv(1)==1);
+                assert(xa*xa.inv()==1);
+                assert(xa*xa.inv()==1);
                 long long int asdf, basdf;
                 assert(gcd(ra, rb) == extgcd(ra, rb, asdf, basdf));
         }
 
-        fastio::write_ensure(20);
-        fastio::print("Hello World\n");
+        printf("Hello World\n");
 }

@@ -2,27 +2,25 @@
 #include <assert.h>
 #include <time.h>
 
-#include "io/fastio.hpp"
 #include "ds/lca.hpp"
-
-using namespace fastio;
+#include "chinaio.cpp"
+intype in;
 
 int main()
 {
-        read_ensure(100);
-        int n,q; scan(n,q);
+        int n=in,q=in;
 
         vector<vector<int>> ch(n);
         for(int i=1;i<n;i++) {
-                int p; read_ensure(100); scan(p);
+                int p=in;
                 ch[p].push_back(i);
         }
 
         LCA lca(n); lca.build(ch);
 
         while(q--) {
-                int u,v; read_ensure(100); scan(u,v);
-
-                write_ensure(100); print(lca.lca(u,v), '\n');
+                int u=in,v=in;
+                write(lca.lca(u,v));*op++='\n';
         }
+        return flush(),0;
 }

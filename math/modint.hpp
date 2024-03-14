@@ -45,7 +45,7 @@ template<typename Int>
 constexpr Int eulerphi(Int x)
 {
         Int phi = x;
-        for (int p = 2; p * p < x; p++) { // eulerphi = x * PI over x's prime factors: 1-1/p
+        for (int p = 2; 1ll * p * p < x; p++) { // eulerphi = x * PI over x's prime factors: 1-1/p
                 if (x % p == 0) {
                         x /= p;
                         phi = phi / p * (p - 1);
@@ -65,6 +65,7 @@ constexpr bool isprime(Int x) {
 template<typename Int, Int mod>
 struct modular
 {
+        typedef Int intty;
         Int x;
         modular() : x(0) {}
 
@@ -102,18 +103,12 @@ struct modular
                 if (x<0) x+=mod;
                 return *this; }
 
-        template<enable_if_t<is_same<Int, int>::value, int> = 69420>
+        template<typename U = Int, typename std::enable_if<std::is_same<U, int>::value, int>::type = 0>
         constexpr modular& operator*=(const modular& o) {
                 x = (long long) x * o.x % mod;
                 return *this;
-                // https://cs.stackexchange.com/questions/77016/modular-multiplication
-                //unsigned long long ab=(long double)x*o.x / mod;
-                //long long r = ((long long)x*o.x - ab*mod) % mod;
-                //if (r<0) r+=mod;
-                //x = r;
-                //return *this;
         }
-        template<enable_if_t<is_same<Int, long long>::value, int> = 69420>
+        template<typename U = Int, typename std::enable_if<std::is_same<U, long long>::value, int>::type = 0>
         constexpr modular& operator*=(const modular& o) {
                 x = (__int128) x * o.x % mod;
                 return *this;

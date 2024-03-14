@@ -2,18 +2,17 @@
 #include <assert.h>
 #include <time.h>
 
-#include "io/fastio.hpp"
 #include "math/factorial.hpp"
 #include "math/dynamic_modint.hpp"
+#include "chinaio.cpp"
+intype in;
 
 int mod;
 typedef dynamic_modint<1> mint;
 
 int main()
 {
-        fastio::read_ensure(500);
-        fastio::write_ensure(500);
-        int T, m; fastio::scan(T, m);
+        int T=in,m=in;
         mint::set_mod(m);
         auto [fact, ifact] = genfact_mod(mint(1), min(m-1, int(1e7)));
 
@@ -22,9 +21,9 @@ int main()
                 return fact[n]*ifact[k]*ifact[n-k];
         };
         while(T--) {
-                fastio::read_ensure(50);
-                int n, k; fastio::scan(n,k);
-                fastio::write_ensure(50);
-                fastio::print((int)choose(n, k),'\n');
+                int n=in,k=in;
+                write((int)choose(n,k));*op++='\n';
+                if(T%100000==0)flush();
         }
+        return flush(),0;
 }

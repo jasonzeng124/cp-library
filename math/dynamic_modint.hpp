@@ -48,18 +48,12 @@ struct dynamic_modular
                 if (x<0) x+=mod;
                 return *this; }
 
-        template<enable_if_t<is_same<Int, int>::value, int> = 69420>
+        template<typename U = Int, typename std::enable_if<std::is_same<U, int>::value, int>::type = 0>
         constexpr dynamic_modular& operator*=(const dynamic_modular& o) {
                 x = (long long) x * o.x % mod;
                 return *this;
-                // https://cs.stackexchange.com/questions/77016/modular-multiplication
-                //unsigned long long ab=(long double)x*o.x / mod;
-                //long long r = ((long long)x*o.x - ab*mod) % mod;
-                //if (r<0) r+=mod;
-                //x = r;
-                //return *this;
         }
-        template<enable_if_t<is_same<Int, long long>::value, int> = 69420>
+        template<typename U = Int, typename std::enable_if<std::is_same<U, long long>::value, int>::type = 0>
         constexpr dynamic_modular& operator*=(const dynamic_modular& o) {
                 x = (__int128) x * o.x % mod;
                 return *this;

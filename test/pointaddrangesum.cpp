@@ -2,26 +2,25 @@
 #include <assert.h>
 #include <time.h>
 
-#include "io/fastio.hpp"
 #include "ds/fenwick.hpp"
-
-using namespace fastio;
+#include "chinaio.cpp"
+intype in;
 
 int main()
 {
-        read_ensure(100);
-        int n,q; scan(n,q);
+        int n=in,q=in;
 
         vector<int> a(n);
-        scans(a.data(),n);
+        for(auto&x:a)x=in;
 
         fenwick<long long> ft(n);
         while(q--) {
-                int t,u,v; read_ensure(100); scan(t,u,v);
+                int t=in,u=in,v=in;
 
                 if(t) {
-                        write_ensure(100); print(ft.query(v)-ft.query(u-1),'\n');
+                        write(ft.query(v)-ft.query(u-1));*op++='\n';
                 }
                 else ft.update(u,v);
         }
+        return flush(),0;
 }

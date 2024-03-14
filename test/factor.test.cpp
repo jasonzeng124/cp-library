@@ -2,17 +2,18 @@
 #include <assert.h>
 #include <time.h>
 
-#include "io/fastio.hpp"
 #include "math/factor.hpp"
+#include "chinaio.cpp"
+intype in;
 
 int main()
 {
-        fastio::read_ensure(30);
-        int x;fastio::scan(x);
+        int x=in;
 
-        fastio::write_ensure(30);
-        fastio::print(x,':',' ');
+        write(x);*op++=':';*op++=' ';
         auto y=factor(x);
-        fastio::prints(y.data(),' ',y.size());
-        fastio::print('\n');
+        for(int i=0;i<y.size();i++)
+                (i?*op++=' ':' '),write(y[i]);
+        *op++='\n';
+        return flush(),0;
 }

@@ -2,27 +2,25 @@
 #include <assert.h>
 #include <time.h>
 
-#include "io/fastio.hpp"
 #include "ds/rmq.hpp"
+#include "chinaio.cpp"
+intype in;
 
 #include <vector>
 using namespace std;
 
-using namespace fastio;
-
 int main()
 {
-        read_ensure(100);
-        int n,q; scan(n,q);
+        int n=in,q=in;
 
         vector<int> a(n);
-        scans(a.data(),n);
+        for(auto&x:a)x=in;
 
         RMQ<int> rmq(n);
         rmq.build(a.data());
         while(q--) {
-                int u,v; read_ensure(100); scan(u,v);
-
-                write_ensure(100); print(a[rmq.query(u,--v)],'\n');
+                int u=in,v=in;
+                write(a[rmq.query(u,--v)]);*op++='\n';
         }
+        return flush(),0;
 }
