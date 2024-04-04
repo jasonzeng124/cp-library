@@ -110,8 +110,14 @@ struct modular
         }
         template<typename U = Int, typename std::enable_if<std::is_same<U, long long>::value, int>::type = 0>
         constexpr modular& operator*=(const modular& o) {
-                x = (__int128) x * o.x % mod;
+                 https://cs.stackexchange.com/questions/77016/modular-multiplication
+                unsigned long long ab=(long double)x*o.x / mod;
+                long long r = ((long long)x*o.x - ab*mod) % mod;
+                if (r<0) r+=mod;
+                x = r;
                 return *this;
+                //x = (__int128) x * o.x % mod;
+                //return *this;
         }
         constexpr modular& operator/=(const modular& o) {
                 return *this *= modular(o).inv(); }

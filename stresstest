@@ -4,6 +4,7 @@ import os
 import sys
 import signal
 import argparse
+import random
 import multiprocessing as mp
 
 parser = argparse.ArgumentParser()
@@ -55,7 +56,7 @@ def stresstest(times,prog1,prog2,gen,is_leader):
 
         with open(f"test_{os.getpid()}.in", 'w') as f:
             islprint("gen", end='\t', flush=1)
-            test = os.popen(gen).read()
+            test = os.popen(gen + ' ' + str(random.randint(1,int(1e9)))).read()
             f.write(test)
 
         out1=None

@@ -22,3 +22,7 @@ long long randint64(long long lo, long long hi) {
 double randreal(double lo, double hi) {
         return uniform_real_distribution<double>(lo,hi)(rng64);
 }
+
+double randnorm(double mu, double sigma) {
+        return normal_distribution<double>(mu, sigma)(rng64);
+}

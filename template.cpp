@@ -19,6 +19,7 @@ using namespace tr2;
 #define dprintf(args...) 69
 #endif
 #define all(x) (x).begin(), (x).end()
+struct cintype { template<typename T> operator T() { T x; cin>>x; return x; } };
 // 1}}}
 
 int main()
