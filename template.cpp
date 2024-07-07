@@ -21,11 +21,11 @@ using namespace tr2;
 #define all(x) (x).begin(), (x).end()
 struct cintype { template<typename T> operator T() { T x; cin>>x; return x; } };
 // 1}}}
+cintype in;
 
 int main()
 {
-        int tt;
-        scanf("%d",&tt);
+        int tt=in;
         for(int ttn=0;ttn<tt;ttn++)
         {
                 // glhf

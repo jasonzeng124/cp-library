@@ -1,0 +1,12 @@
+set nocompatible
+abbrev pb push_back
+abbrev ins insert
+abbrev pob pop_back
+abbrev pof pop_front
+
+syntax on
+filetype plugin on
+set ai si ts=8 expandtab
+set hlsearch incsearch ignorecase
+set showcmd
+nnoremap <F6> v//}}}<cr>zf

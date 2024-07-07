@@ -15,7 +15,7 @@ struct RMQ {
                 for(int i=0;i<n;i++) st[i] = i;
         }
         int argmin(int a, int b) {
-                return less()(arr[a],arr[b]) ? a : b;
+                return Compare()(arr[a],arr[b]) ? a : b;
         }
         void build(T* a) {
                 for(int i=0;i<n;i++) arr[i] = a[i];

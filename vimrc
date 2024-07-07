@@ -30,17 +30,15 @@ abbrev pof pop_front
 
 set mouse=a
 syntax on
-set ai
-set si
+set ai si
+set cino=l1
 set expandtab
 set shiftwidth=8
 set tabstop=8
 set smarttab
 
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
+set ignorecase smartcase
+set hlsearch incsearch
 
 set ruler
 set undofile
@@ -50,17 +48,19 @@ set undoreload=10000
 
 set lazyredraw
 
-set rnu
-set nu
-set foldmethod=syntax
-set foldcolumn=4
+set rnu nu
+"set foldmethod=syntax
+"set foldcolumn=4
 set foldlevel=99
 set foldlevelstart=99
 highlight Folded ctermbg=LightYellow
 set cursorline
 highlight CursorLine   cterm=NONE ctermbg=lightgreen ctermfg=NONE
+set showcmd
 
-nnoremap <F9> :r /home/jayjay/dev/comp/lib/template.cpp<cr>kddzc
+nnoremap <F6> v/}}}<cr>zf
+nnoremap <F9> :r /home/jayjay/dev/comp/lib/template.cpp<cr>kddv/}}}<cr>zf
+nnoremap <F10> :r /home/jayjay/dev/comp/lib/chinaio.cpp<cr>
 
 nnoremap <C-j> 10j
 nnoremap <C-k> 10k
@@ -69,7 +69,6 @@ set matchpairs+=<:>
 
 autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
 autocmd InsertLeave * let &l:foldmethod=w:last_fdm
-autocmd BufWinEnter * silent! norm zc
 
 let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace']
 let g:ale_fix_on_save = 1
