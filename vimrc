@@ -14,9 +14,11 @@ Plugin 'Jorengarenar/vim-syntaxMarkerFold'
 Plugin 'luochen1990/rainbow'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'petRUShka/vim-sage'
+Plugin 'lervag/vimtex'
 
 call vundle#end()            " required
-filetype plugin indent on    " required
+"filetype plugin indent on    " required
+filetype plugin on    " required
 
 map <C-_> <leader>c<space>j
 inoremap <space> <C-G>u<space>
@@ -30,7 +32,8 @@ abbrev pof pop_front
 
 set mouse=a
 syntax on
-set ai si
+"set ai si
+set ai
 set expandtab
 set shiftwidth=8
 set tabstop=8
@@ -77,10 +80,12 @@ let g:ale_lint_delay = 2000
 
 let g:ale_c_cc_executable = 'gcc'
 let g:ale_cpp_cc_executable = 'gcc'
-let g:ale_c_cc_options = '-std=c11 -Wall -I /mnt/c/Users/jayja/Documents/dev2/comp/lib'
-let g:ale_cpp_cc_options = '-std=c++17 -Wall -I /mnt/c/Users/jayja/Documents/dev2/comp/lib -Wno-sign-compare'
+let g:ale_c_cc_options = '-std=c11 -Wall -I /home/jayjay/dev2/comp/lib'
+let g:ale_cpp_cc_options = '-std=c++17 -Wall -I /home/jayjay/dev2/comp/lib -Wno-sign-compare'
 
 let g:rainbow_active = 1
+
+let g:vimtex_view_enabled = 0
 
 au BufRead,BufNewFile *.ipy  set filetype=python
 

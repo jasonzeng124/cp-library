@@ -1,6 +1,6 @@
 export wflags="-fuse-ld=gold -Wall -Wno-unused-result"
 export dflags="-g -fsanitize=address,undefined -DDEBUG"
-export iflags="-I /mnt/c/Users/jayja/Documents/dev2/comp/lib"
+export iflags="-I $HOME/dev2/comp/lib"
 export stldbmode="-D_GLIB_CXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC"
 
 alias gpp="g++ -O2 -g $wflags $iflags -std=c++17"

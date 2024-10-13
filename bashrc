@@ -16,8 +16,8 @@ shopt -s histappend
 shopt -s histverify
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=30000
-HISTFILESIZE=30000
+HISTSIZE=
+HISTFILESIZE=
 
 # BASH Options
 shopt -s checkwinsize # check window size and reset env LINES/COLUMNS
@@ -117,3 +117,6 @@ if ! shopt -oq posix; then
 fi
 
 [[ -s /home/jayjay/.autojump/etc/profile.d/autojump.sh ]] && source /home/jayjay/.autojump/etc/profile.d/autojump.sh
+
+
+cat ~/todo_fr
