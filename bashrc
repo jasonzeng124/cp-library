@@ -16,7 +16,6 @@ shopt -s histappend
 shopt -s histverify
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-export PROMPT_COMMAND="history -a; history -n"
 HISTSIZE=30000
 HISTFILESIZE=30000
 
@@ -27,7 +26,6 @@ shopt -s autocd # type dir to cd
 shopt -s cdspell # typos
 
 bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"

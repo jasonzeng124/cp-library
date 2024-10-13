@@ -31,7 +31,6 @@ abbrev pof pop_front
 set mouse=a
 syntax on
 set ai si
-set cino=l1
 set expandtab
 set shiftwidth=8
 set tabstop=8
@@ -59,8 +58,10 @@ highlight CursorLine   cterm=NONE ctermbg=lightgreen ctermfg=NONE
 set showcmd
 
 nnoremap <F6> v/}}}<cr>zf
-nnoremap <F9> :r /home/jayjay/dev/comp/lib/template.cpp<cr>kddv/}}}<cr>zf
-nnoremap <F10> :r /home/jayjay/dev/comp/lib/chinaio.cpp<cr>
+nnoremap <F9> :r /home/jayjay/dev2/comp/lib/template.cpp<cr>kddv/}}}<cr>zf
+nnoremap <F10> :r /home/jayjay/dev2/comp/lib/chinaio.cpp<cr>
+"nnoremap <F9> :r /home/jayjay/dev/comp/lib/template.cpp<cr>kddv/}}}<cr>zf
+"nnoremap <F10> :r /home/jayjay/dev/comp/lib/chinaio.cpp<cr>
 
 nnoremap <C-j> 10j
 nnoremap <C-k> 10k
@@ -76,8 +77,8 @@ let g:ale_lint_delay = 2000
 
 let g:ale_c_cc_executable = 'gcc'
 let g:ale_cpp_cc_executable = 'gcc'
-let g:ale_c_cc_options = '-std=c11 -Wall -I /mnt/c/Users/jayja/Documents/dev/comp/lib'
-let g:ale_cpp_cc_options = '-std=c++17 -Wall -I /mnt/c/Users/jayja/Documents/dev/comp/lib -Wno-sign-compare'
+let g:ale_c_cc_options = '-std=c11 -Wall -I /mnt/c/Users/jayja/Documents/dev2/comp/lib'
+let g:ale_cpp_cc_options = '-std=c++17 -Wall -I /mnt/c/Users/jayja/Documents/dev2/comp/lib -Wno-sign-compare'
 
 let g:rainbow_active = 1
 
