@@ -6,14 +6,15 @@ using namespace std;
 template<typename edge_t>
 struct adj_vector
 {
-        int vertices = -1;
+        int nvert = -1;
         vector<pair<int, edge_t>> acc_edge;
         vector<edge_t> adj;
         vector<int> start;
 
-        adj_vector(int v) : vertices(v) {};
-        adj_vector(int v, int e) : vertices(v) {
+        adj_vector(int v) : nvert(v) {};
+        adj_vector(int v, int e) : nvert(v) {
                 acc_edge.reserve(e);
+                adj.reserve(e);
         }
 
         void add(int a, edge_t edge) {
@@ -21,23 +22,33 @@ struct adj_vector
         }
 
         void prepare() {
-                assert(vertices != -1);
+                assert(nvert != -1);
                 adj.resize(acc_edge.size());
-                vector<int> nind(vertices+1);
+                vector<int> nind(nvert+1);
                 for (auto [v, e] : acc_edge) {
                         nind[v+1]++;
                 }
-                for (int i=1; i<=vertices; i++) {
+                for (int i=1; i<=nvert; i++) {
                         nind[i] += nind[i-1];
                 }
                 start = nind;
                 for (auto [v, e] : acc_edge) {
                         adj[nind[v]++] = e;
                 }
+                acc_edge.clear();
+        }
+
+        void shrink() {
                 vector<pair<int,edge_t>>().swap(acc_edge);
         }
 
         void clear() {
+                acc_edge.clear();
+                adj.clear();
+                start.clear();
+        }
+
+        void clear_mem() {
                 vector<pair<int, edge_t>>().swap(acc_edge);
                 vector<edge_t>().swap(adj);
                 vector<int>().swap(start);
