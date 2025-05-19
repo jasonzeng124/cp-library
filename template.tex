@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
 \usepackage{thmtools}
 \usepackage{float}
 %\usepackage[pdftex]{graphicx}
@@ -7,8 +8,13 @@
 %\usepackage{asymptote}
 \usepackage{enumitem}
 %\usepackage{minted}
-%\usepackage{hyperref}
+\usepackage{hyperref}
+\usepackage{comment}
 \usepackage{chngcntr}
+\usepackage{centernot}
+\usepackage{tikz-cd}
+%\usepackage{quiver}
+\usepackage[framemethod=tikz]{mdframed}
 
 % stolen from evan.sty
 \newcommand{\cbrt}[1]{\sqrt[3]{#1}}
@@ -19,9 +25,9 @@
 \newcommand{\wt}{\widetilde}
 \newcommand{\wh}{\widehat}
 \newcommand{\eps}{\varepsilon}
+\newcommand{\vphi}{\varphi}
 \newcommand{\vocab}[1]{\textbf{\color{blue}\sffamily #1}}
 \providecommand{\alert}{\vocab}
-\providecommand{\half}{\frac{1}{2}}
 \newcommand{\catname}{\mathsf}
 \newcommand{\hrulebar}{
   \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
@@ -40,6 +46,10 @@
 \newcommand{\QQ}{\mathbb Q}
 \newcommand{\RR}{\mathbb R}
 \newcommand{\ZZ}{\mathbb Z}
+\newcommand{\mbb}{\mathbb}
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mscr}{\mathscr}
+\newcommand{\mrm}{\mathrm}
 \newcommand{\charin}{\text{ char }}
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\Aut}{Aut}
@@ -56,13 +66,41 @@
 \newcommand{\ray}[1]{\overrightarrow{#1}}
 \newcommand{\seg}[1]{\overline{#1}}
 
+\counterwithin*{equation}{section}
 
+# stolen from evan.sty
+\mdfdefinestyle{mdbluebox}{%
+roundcorner=10pt,
+linewidth=1pt,
+skipabove=12pt,
+innertopmargin=9pt,
+innerbottommargin=9pt,
+skipbelow=2pt,
+linecolor=blue,
+nobreak=true,
+backgroundcolor=gray!5,
+}
+\declaretheoremstyle[
+headfont=\sffamily\bfseries,
+mdframed={style=mdbluebox},
+headpunct={\\[3pt]},
+postheadspace={0pt}
+]{thmbluebox}
+
+\declaretheoremstyle[
+    bodyfont=\normalfont,
+    headfont=\bfseries,
+]{plain}
+
+\declaretheorem[name=Theorem,numberwithin=section]{theorem}
 \declaretheorem[name=Lemma,sibling=theorem]{lemma}
 \declaretheorem[name=Proposition,sibling=theorem]{proposition}
 \declaretheorem[name=Corollary,sibling=theorem]{corollary}
 \declaretheorem[name=Assumption,sibling=theorem]{assume}
 \declaretheorem[name=Definition,sibling=theorem]{definition}
 \declaretheorem[name=Problem]{problem}
+% for fancy box:
+%\declaretheorem[name=Problem,style=thmbluebox]{problem}
 \declaretheorem[name=Theorem,numbered=no]{theorem*}
 \declaretheorem[name=Lemma,numbered=no]{lemma*}
 \declaretheorem[name=Proposition,numbered=no]{proposition*}
@@ -71,6 +109,8 @@
 \declaretheorem[name=Definition,numbered=no]{definition*}
 \declaretheorem[name=Problem,numbered=no]{problem*}
 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.3ex}
 
 \begin{document}
 

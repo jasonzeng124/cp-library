@@ -5,7 +5,7 @@
 
 #include "opt.hpp"
 
-
+#ifndef DEBUG
 namespace _factor_detail {
         using namespace std;
         typedef uint32_t ui;
@@ -51,3 +51,15 @@ std::vector<int> factor(uint32_t x) {
         if(x > 1) v.push_back(x);
         return std::vector<int>{v.begin(),v.end()};
 }
+#endif
+#ifdef DEBUG
+std::vector<int> factor(uint32_t x) {
+        assert(x<=1e9);
+        std::vector<uint32_t> v;
+        for(int i=2;i*i<=x;i++) {
+                while(x%i==0) v.push_back(i), x/=i;
+        }
+        if(x > 1) v.push_back(x);
+        return std::vector<int>{v.begin(),v.end()};
+}
+#endif

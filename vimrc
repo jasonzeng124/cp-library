@@ -86,6 +86,9 @@ let g:ale_cpp_cc_options = '-std=c++17 -Wall -I /home/jayjay/dev2/comp/lib -Wno-
 let g:rainbow_active = 1
 
 let g:vimtex_view_enabled = 0
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_quickfix_autoclose_after_keystrokes = 2
+let g:vimtex_indent_enabled = 0
 
 au BufRead,BufNewFile *.ipy  set filetype=python
 
