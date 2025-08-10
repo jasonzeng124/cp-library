@@ -9,15 +9,15 @@ struct RMQ {
         int n;
         vector<T> arr;
         vector<int> st;
-        RMQ(int n) : n(n), arr(n) {
+        RMQ(int n) : n(n), arr(n), st(n*LG) {
                 assert(n <= 1<<LG);
-                st.resize(n * LG);
                 for(int i=0;i<n;i++) st[i] = i;
         }
         int argmin(int a, int b) {
                 return Compare()(arr[a],arr[b]) ? a : b;
         }
-        void build(T* a) {
+        template<typename Tp>
+        void build(Tp a) {
                 for(int i=0;i<n;i++) arr[i] = a[i];
                 for(int l=1; l<LG; l++) 
                         for(int i=0; i + (1<<(l-1)) < n; i++)
