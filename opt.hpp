@@ -7,4 +7,3 @@
 #endif
 
 #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
-#define INLINE inline __attribute__((always_inline))

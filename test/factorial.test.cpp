@@ -14,7 +14,7 @@ int main()
 {
         int T=in,m=in;
         mint::set_mod(m);
-        auto [fact, ifact] = genfact_mod(mint(1), min(m-1, int(1e7)));
+        auto [fact, ifact] = genfact<mint>(min(m-1, int(1e7)));
 
         auto choose = [&](int n, int k) -> mint {
                 if(k<0||k>n) return 0;

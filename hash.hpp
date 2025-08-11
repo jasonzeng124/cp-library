@@ -1,5 +1,7 @@
 #include <chrono>
 #include <functional>
+
+namespace hashing {
 using namespace std;
 
 #define _ull unsigned long long
@@ -44,3 +46,6 @@ struct array_hash {
                 return hsh;
         }
 };
+
+}
+using namespace hashing;

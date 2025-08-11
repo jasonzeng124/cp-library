@@ -64,7 +64,7 @@ struct adj_vector
                 auto end() { return last; }
         };
 
-        inline edge_range operator[] (int v) {
+        edge_range operator[] (int v) {
                 return {adj.begin()+start[v], adj.begin()+start[v+1]};
         }
 };
